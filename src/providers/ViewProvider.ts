@@ -10,7 +10,7 @@ import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
 
 export class ViewProvider implements WebviewViewProvider {
-  public static readonly viewType = "sample-id";
+  public static readonly viewType = "break-timer-extension";
 
   constructor(private readonly _extensionUri: Uri) {}
 

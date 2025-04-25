@@ -17,19 +17,19 @@
   ],
   "contributes": {
     "views": {
-      "sample-id": [
+      "break-timer-extension": [
         {
           "type": "webview",
-          "id": "sample-id",
-          "name": "sample-name"
+          "id": "break-timer-extension",
+          "name": "Break Timer Extension"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "sample-id",
-          "title": "sample-title",
+          "id": "break-timer-extension",
+          "title": "Break Timer Extension",
           "icon": "./resources/webview_icon.svg"
         }
       ]
