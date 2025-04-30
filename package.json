@@ -1,12 +1,12 @@
 {
-  "name": "sample-extension-04251226",
+  "name": "break-timer-04251226",
   "displayName": "sample displayName",
   "description": "sample description",
   "version": "0.0.1",
   "publisher": "VS-Modules",
   "repository": {
     "type": "git",
-    "url": "https://github.com/2201009-kikukawa/Sample-extension"
+    "url": "https://github.com/2201009-kikukawa/break-timer-extension"
   },
   "engines": {
     "vscode": "^1.93.1"
@@ -17,19 +17,19 @@
   ],
   "contributes": {
     "views": {
-      "sample-id": [
+      "break-timer": [
         {
           "type": "webview",
-          "id": "sample-id",
-          "name": "sample-name"
+          "id": "break-timer",
+          "name": "Break Timer"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "sample-id",
-          "title": "sample-title",
+          "id": "break-timer",
+          "title": "Break Timer",
           "icon": "./resources/webview_icon.svg"
         }
       ]
