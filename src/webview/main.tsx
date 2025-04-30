@@ -5,37 +5,34 @@ import { VSCodeButton, VSCodeTextField } from "@vscode/webview-ui-toolkit/react"
 const main = () => {
   const [hour, setHour] = useState("");
   const [minutes, setMinutes] = useState("");
-  const [minError, setMinError] = useState(false);
-  const [hourError, setHourError] = useState(false);
-  const [error, setError] = useState("");
+  const [hourError, setHourError] = useState("");
+  const [minError, setMinError] = useState("");
 
   const checkHourValidate = (e: any) => {
     const newValue = e.target.value;
     setHour(newValue);
 
-    if (!/^\d*$/.test(newValue)) { return setHourError(true); }
+    if (!/^\d*$/.test(newValue)) { return setHourError("時間：数字のみを入力してください"); }
 
-    setHourError(false);
+    setHourError("");
   };
 
   const checkMinValidate = (e: any) => {
     const newValue = e.target.value;
     setMinutes(newValue);
 
-    if (!/^\d*$/.test(newValue)) { return setMinError(true); }
+    if (!/^\d*$/.test(newValue)) { return setMinError("分：数字のみを入力してください"); }
 
-    setMinError(false);
+    setMinError("");
   };
 
-  // hour, minuteともにエラーがなければ送信
   const checkValidate = () => {
-    if (hourError || minError) {
-      hourError ? setHour("") : "";
-      minError ? setMinutes("") : "";
-      return setError("数字を入力してください");
+    if (!(hourError || minError)) {
+      // タイマー開始処理
+      return;
     }
-
-    setError("");
+    hourError ? setHour("") : "";
+    minError ? setMinutes("") : "";
   };
 
   return (
@@ -46,10 +43,13 @@ const main = () => {
         <span className="textfield-span">:</span>
         <VSCodeTextField placeholder="minutes" className="vscode-text-field" value={minutes} oninput={checkMinValidate} />
       </div>
-      <VSCodeButton className="vscode-button" onclick={checkValidate}>START</VSCodeButton>
-      {error && (
-        <span className="error">{error}</span>
+      {hourError && (
+        <span className="error">{hourError}</span>
       )}
+      {minError && (
+        <span className="error">{minError}</span>
+      )}
+      <VSCodeButton className="vscode-button" onClick={checkValidate}>START</VSCodeButton>
     </>
   );
 };

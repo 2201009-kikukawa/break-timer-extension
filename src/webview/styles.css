@@ -1,16 +1,12 @@
 @charset "utf-8";
 
 :root {
-  --input-min-width: none;
+  --input-min-width: unset !important;
 }
 
 #root {
   display: flex;
   flex-direction: column;
-}
-
-.root {
-  min-width: none;
 }
 
 .content-wrap {
