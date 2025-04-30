@@ -1,8 +1,22 @@
 @charset "utf-8";
 
+:root {
+  --input-min-width: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.root {
+  min-width: none;
+}
+
 .content-wrap {
   display: flex;
   justify-content: center;
+  max-width: 15rem;
 }
 
 .vscode-text-field {
@@ -17,11 +31,14 @@
 }
 
 .vscode-button {
-  width: 100%;
+  max-width: 15rem;
   margin-top: 1rem;
 }
 
 .error {
+  max-width: 15rem;
   color: red;
   font-size: 0.9em;
+  margin-top: .5rem;
+  text-align: center;
 }

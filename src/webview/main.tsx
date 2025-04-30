@@ -5,27 +5,37 @@ import { VSCodeButton, VSCodeTextField } from "@vscode/webview-ui-toolkit/react"
 const main = () => {
   const [hour, setHour] = useState("");
   const [minutes, setMinutes] = useState("");
-  const [minError, setMinError] = useState("");
-  const [hourError, setHourError] = useState("");
+  const [minError, setMinError] = useState(false);
+  const [hourError, setHourError] = useState(false);
+  const [error, setError] = useState("");
 
   const checkHourValidate = (e: any) => {
     const newValue = e.target.value;
-    if (/^\d*$/.test(newValue)) {
-      setHour(newValue);
-      setHourError("");
-    } else {
-      setHourError("hour: 数字のみを入力してください");
-    }
+    setHour(newValue);
+
+    if (!/^\d*$/.test(newValue)) { return setHourError(true); }
+
+    setHourError(false);
   };
 
   const checkMinValidate = (e: any) => {
     const newValue = e.target.value;
-    if (/^\d*$/.test(newValue)) {
-      setMinutes(newValue);
-      setMinError("");
-    } else {
-      setMinError("minutes: 数字のみを入力してください");
+    setMinutes(newValue);
+
+    if (!/^\d*$/.test(newValue)) { return setMinError(true); }
+
+    setMinError(false);
+  };
+
+  // hour, minuteともにエラーがなければ送信
+  const checkValidate = () => {
+    if (hourError || minError) {
+      hourError ? setHour("") : "";
+      minError ? setMinutes("") : "";
+      return setError("数字を入力してください");
     }
+
+    setError("");
   };
 
   return (
@@ -36,13 +46,10 @@ const main = () => {
         <span className="textfield-span">:</span>
         <VSCodeTextField placeholder="minutes" className="vscode-text-field" value={minutes} oninput={checkMinValidate} />
       </div>
-      {hourError && (
-        <span className="error">{hourError}</span>
+      <VSCodeButton className="vscode-button" onclick={checkValidate}>START</VSCodeButton>
+      {error && (
+        <span className="error">{error}</span>
       )}
-      {minError && (
-        <span className="error">{minError}</span>
-      )}
-      <VSCodeButton className="vscode-button">START</VSCodeButton>
     </>
   );
 };
