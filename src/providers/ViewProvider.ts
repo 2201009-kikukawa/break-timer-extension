@@ -9,6 +9,7 @@ import {
 } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
+import { EventListener } from "../listener/EventListener";
 
 export class ViewProvider implements WebviewViewProvider {
   public static readonly viewType = "break-timer";
@@ -27,7 +28,8 @@ export class ViewProvider implements WebviewViewProvider {
 
     webviewView.webview.html = this._getWebviewContent(webviewView.webview, this._extensionUri);
 
-    this._setWebviewMessageListener(webviewView);
+    const listener = new EventListener();
+    listener.setWebviewMessageListener(webviewView);
   }
 
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
@@ -51,20 +53,5 @@ export class ViewProvider implements WebviewViewProvider {
         </body>
       </html>
     `;
-  }
-
-  private _setWebviewMessageListener(webviewView: WebviewView) {
-    webviewView.webview.onDidReceiveMessage((message) => {
-      const type = message.type;
-      const text = message.text;
-
-      if (type === 'showModal') {
-        const selection = window.showInformationMessage(
-          text,
-          { modal: true },
-          "OK"
-        );
-      }
-    });
   }
 }
