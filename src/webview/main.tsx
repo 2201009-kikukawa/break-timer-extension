@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { VSCodeButton, VSCodeTextField } from "@vscode/webview-ui-toolkit/react";
-import { EVENT_TYPES, EventType } from "../types/classNames";
+import { EventTypes } from "../types/classNames";
 
 // VSCode API使用
 declare const acquireVsCodeApi: () => {
-  postMessage: (message: EventType) => void;
+  postMessage: (message: { type: EventTypes, text: string }) => void;
 };
 const vscode = acquireVsCodeApi();
 
@@ -37,8 +37,8 @@ const main = () => {
     if (!(hourError || minError) && (hour && minutes)) {
       // タイマー開始処理
       vscode.postMessage({
-        type: EVENT_TYPES.showModal.type,
-        text: EVENT_TYPES.showModal.text
+        type: EventTypes.showModal,
+        text: "メッセージ"
       });
       return;
     }

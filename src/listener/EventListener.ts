@@ -1,13 +1,13 @@
 import { WebviewView, window } from "vscode";
-import { EVENT_TYPES, EventType } from "../types/classNames";
+import { EventTypes } from "../types/classNames";
 
 export class EventListener {
   public setWebviewMessageListener(webviewView: WebviewView) {
-    webviewView.webview.onDidReceiveMessage((message: EventType) => {
+    webviewView.webview.onDidReceiveMessage((message: {type: EventTypes, text: string}) => {
       const type = message.type;
       const text = message.text;
 
-      if (type === EVENT_TYPES.showModal.type) {
+      if (type === EventTypes.showModal) {
         const selection = window.showInformationMessage (
           text,
           { modal: true },

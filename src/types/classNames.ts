@@ -1,8 +1,8 @@
-export const EVENT_TYPES = {
-  showModal: {
-    type: "showModal",
-    text: "メッセージ"
-  }
-} as const;
+export enum EventTypes {
+  showModal = 'showModal'
+};
 
-export type EventType = typeof EVENT_TYPES[keyof typeof EVENT_TYPES];
+export type EventListenerProps = {
+  type: EventTypes;
+  text: string;
+};
