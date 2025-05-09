@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { VSCodeButton, VSCodeTextField } from "@vscode/webview-ui-toolkit/react";
-import { EventTypes } from "../types/classNames";
+import { EventListenerProps, EventTypes } from "../types/classNames";
 
 // VSCode API使用
 declare const acquireVsCodeApi: () => {
-  postMessage: (message: { type: EventTypes, text: string }) => void;
+  postMessage: (message: EventListenerProps) => void;
 };
 const vscode = acquireVsCodeApi();
 

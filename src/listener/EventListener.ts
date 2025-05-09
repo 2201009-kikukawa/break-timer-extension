@@ -1,9 +1,9 @@
 import { WebviewView, window } from "vscode";
-import { EventTypes } from "../types/classNames";
+import { EventListenerProps, EventTypes } from "../types/classNames";
 
 export class EventListener {
   public setWebviewMessageListener(webviewView: WebviewView) {
-    webviewView.webview.onDidReceiveMessage((message: {type: EventTypes, text: string}) => {
+    webviewView.webview.onDidReceiveMessage((message: EventListenerProps) => {
       const type = message.type;
       const text = message.text;
 
