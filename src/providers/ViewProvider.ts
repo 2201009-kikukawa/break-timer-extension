@@ -5,14 +5,16 @@ import {
   WebviewView,
   WebviewViewProvider,
   WebviewViewResolveContext,
+  window,
 } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
+import { EventListener } from "../listener/EventListener";
 
 export class ViewProvider implements WebviewViewProvider {
   public static readonly viewType = "break-timer";
 
-  constructor(private readonly _extensionUri: Uri) {}
+  constructor(private readonly _extensionUri: Uri) { }
 
   public resolveWebviewView(
     webviewView: WebviewView,
@@ -25,6 +27,9 @@ export class ViewProvider implements WebviewViewProvider {
     };
 
     webviewView.webview.html = this._getWebviewContent(webviewView.webview, this._extensionUri);
+
+    const listener = new EventListener();
+    listener.setWebviewMessageListener(webviewView);
   }
 
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { VSCodeButton, VSCodeTextField } from "@vscode/webview-ui-toolkit/react";
+import { EventListenerProps, EventTypes } from "../types/classNames";
+
+// VSCode API使用
+declare const acquireVsCodeApi: () => {
+  postMessage: (message: EventListenerProps) => void;
+};
+const vscode = acquireVsCodeApi();
 
 const main = () => {
   const [hour, setHour] = useState("");
@@ -27,8 +34,12 @@ const main = () => {
   };
 
   const checkValidate = () => {
-    if (!(hourError || minError)) {
+    if (!(hourError || minError) && (hour && minutes)) {
       // タイマー開始処理
+      vscode.postMessage({
+        type: EventTypes.showModal,
+        text: "メッセージ"
+      });
       return;
     }
     hourError ? setHour("") : "";
