@@ -54,7 +54,7 @@ function stopCountDown() {
   isRunning = false;
 
   // 終了した旨を通知
-  const selection = window.showInformationMessage('タイマーを停止しました');
+  window.showInformationMessage('タイマーを停止しました');
 }
 
 // ステータスバー更新
