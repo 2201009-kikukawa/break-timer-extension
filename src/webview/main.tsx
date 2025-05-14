@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { EventListenerProps, EventTypes } from "../types/classNames";
 import { VSCodeButton, VSCodeTextField } from "@vscode/webview-ui-toolkit/react";
@@ -8,6 +8,13 @@ declare const acquireVsCodeApi: () => {
   postMessage: (message: EventListenerProps) => void;
 };
 const vscode = acquireVsCodeApi();
+
+// 型宣言
+interface eventMessage {
+  type: EventTypes,
+  running: boolean,
+  time: number
+}
 
 const main = () => {
   // 初期状態
@@ -28,7 +35,7 @@ const main = () => {
       text: ''
     });
 
-    const handleMessage = (event: MessageEvent) => {
+    const handleMessage = (event: MessageEvent<eventMessage>) => {
       const { type, running, time } = event.data;
 
       if (type === EventTypes.init) { // 状態チェック
