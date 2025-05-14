@@ -1,5 +1,10 @@
 export enum EventTypes {
-  showModal = 'showModal'
+  init = 'init',
+  showModal = 'showModal',
+  startTimer = 'startTimer',
+  pauseTimer = 'pauseTimer',
+  restartTimer = 'restartTimer',
+  clearTimer = 'clearTimer'
 };
 
 export type EventListenerProps = {
