@@ -26,15 +26,20 @@
   align-self: center;
 }
 
-.vscode-button {
+.vscode-button-wrap {
+  display: flex;
   max-width: 15rem;
   margin-top: 1rem;
+  gap: .5rem;
+}
+
+.vscode-button {
+  width: 100%;
 }
 
 .error {
   max-width: 15rem;
   color: red;
   font-size: 0.9em;
-  margin-top: .5rem;
   text-align: center;
 }
