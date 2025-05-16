@@ -1,7 +1,7 @@
 import { WebviewView, window, Uri } from "vscode";
 import * as vscode from "vscode";
 import { EventListenerProps, EventTypes } from "../types/classNames";
-import { TabEventListener } from "./TabEventListener";
+import { TabEventListener } from "../providers/TabProvider";
 
 let statusBarItem: vscode.StatusBarItem;  // ステータスバー管理
 let countdownTimer: NodeJS.Timeout | undefined; // タイマー管理

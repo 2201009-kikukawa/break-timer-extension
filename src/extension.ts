@@ -1,5 +1,5 @@
 import { ExtensionContext, window } from "vscode";
-import { ViewProvider } from "./providers/ViewProvider";
+import { ViewProvider } from "./providers/SidebarProvider";
 
 export function activate(context: ExtensionContext) {
   const provider = new ViewProvider(context.extensionUri);
