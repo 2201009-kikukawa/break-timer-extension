@@ -16,7 +16,7 @@ interface eventMessage {
   time: number
 }
 
-const main = () => {
+const sidebar = () => {
   // 初期状態
   const [isRunning, setIsRunning] = useState(false);
   const [seconds, setSeconds] = useState(0);
@@ -157,7 +157,7 @@ const main = () => {
   );
 };
 
-export default main;
+export default sidebar;
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
-root.render(React.createElement(main));
+root.render(React.createElement(sidebar));

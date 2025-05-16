@@ -29,7 +29,7 @@ const webviewConfig = {
   ...baseConfig,
   target: "es2020",
   format: "esm",
-  entryPoints: ["./src/webview/main.tsx"],
+  entryPoints: ["./src/webview/sidebar.tsx"],
   outfile: "./out/webview.js",
   plugins: [
     // Copy webview css files to `out` directory unaltered
@@ -41,6 +41,16 @@ const webviewConfig = {
       },
     }),
   ],
+};
+
+// Config for webview source code (to be run in a web-based context)
+/** @type BuildOptions */
+const webviewTabConfig = {
+  ...baseConfig,
+  target: "es2020",
+  format: "esm",
+  entryPoints: ["./src/webview/tab.tsx"],
+  outfile: "./out/webviewTab.js",
 };
 
 // This watch config adheres to the conventions of the esbuild-problem-matchers
@@ -83,6 +93,7 @@ const watchConfig = {
       // Build extension and webview code
       await build(extensionConfig);
       await build(webviewConfig);
+      await build(webviewTabConfig);
       console.log("build complete");
     }
   } catch (err) {

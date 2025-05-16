@@ -5,7 +5,6 @@ import {
   WebviewView,
   WebviewViewProvider,
   WebviewViewResolveContext,
-  window,
 } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
@@ -28,7 +27,7 @@ export class ViewProvider implements WebviewViewProvider {
 
     webviewView.webview.html = this._getWebviewContent(webviewView.webview, this._extensionUri);
 
-    const listener = new EventListener();
+    const listener = new EventListener(this._extensionUri);
     listener.setWebviewMessageListener(webviewView);
   }
 

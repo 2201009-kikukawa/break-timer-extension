@@ -1,11 +1,13 @@
-import { WebviewView, window } from "vscode";
+import { WebviewView, window, Uri } from "vscode";
 import * as vscode from "vscode";
 import { EventListenerProps, EventTypes } from "../types/classNames";
+import { TabEventListener } from "../providers/TabProvider";
 
 let statusBarItem: vscode.StatusBarItem;  // ステータスバー管理
 let countdownTimer: NodeJS.Timeout | undefined; // タイマー管理
 let remainingSeconds = 0; // 残り秒数
 let isRunning = false;  // true: タイマー動作中, false: タイマー停止中
+let context: Uri;
 
 // タイマー開始
 function startCountdown(seconds: number) {
@@ -23,15 +25,17 @@ function startCountdown(seconds: number) {
     // タイマーが0になったらモーダル表示
     if (remainingSeconds <= 0) {
       clearInterval(countdownTimer);
+      stopCountDown();
+
       const selection = window.showInformationMessage(
         'おつかれさまでした！休憩中にストレッチをしませんか？',
         { modal: true },
         "ストレッチをする"
-      );
-
-      // ステータスバー非表示
-      clearStatusBar();
-      isRunning = false;
+      ).then((selection) => {
+        if (selection === "ストレッチをする") {
+          openTabView();
+        }
+      });
     }
   }, 1000);
 }
@@ -54,7 +58,7 @@ function stopCountDown() {
   isRunning = false;
 
   // 終了した旨を通知
-  window.showInformationMessage('タイマーを停止しました');
+  window.showInformationMessage('タイマーが終了しました');
 }
 
 // ステータスバー更新
@@ -80,8 +84,14 @@ function clearStatusBar() {
   }
 }
 
+function openTabView() {
+  const tab = new TabEventListener(context);
+  tab.setTabView();
+}
 
 export class EventListener {
+  constructor(extensionUri: Uri) { context = extensionUri; }
+
   public setWebviewMessageListener(webviewView: WebviewView) {
     webviewView.webview.onDidReceiveMessage((message: EventListenerProps) => {
       const type = message.type;
