@@ -19,7 +19,7 @@
   "overrides": [
     {
       "files": [
-        "./src/webview/main.tsx"
+        "./src/webview/sidebar.tsx"
       ],
       "rules": {
         "@typescript-eslint/naming-convention": "off"
