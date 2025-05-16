@@ -43,3 +43,8 @@
   font-size: 0.9em;
   text-align: center;
 }
+
+.tab-video {
+  width: fit-content;
+  margin: 3rem auto;
+}
