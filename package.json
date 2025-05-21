@@ -1,7 +1,7 @@
 {
-  "name": "break-timer-04251226",
-  "displayName": "sample displayName",
-  "description": "sample description",
+  "name": "Break Timer",
+  "displayName": "Break Timer",
+  "description": "A simple break timer extension for VSCode.",
   "version": "0.0.1",
   "publisher": "VS-Modules",
   "repository": {
